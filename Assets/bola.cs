@@ -15,17 +15,14 @@ public class bola : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("mesa"))
-        {
-            rigi.constraints = RigidbodyConstraints.FreezePositionY;
-        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("goal")) {
             col.enabled = false;
-            rigi.constraints = RigidbodyConstraints.None;
+            rigi.velocity = Vector3.zero;
         }
     }
 
