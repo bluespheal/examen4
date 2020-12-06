@@ -6,9 +6,11 @@ public class bola : MonoBehaviour
 {
     Rigidbody rigi;
     Collider col;
+    GameManager controlador;
     // Start is called before the first frame update
     void Start()
     {
+        controlador = FindObjectOfType<GameManager>();
         rigi = gameObject.GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
     }
@@ -22,13 +24,9 @@ public class bola : MonoBehaviour
     {
         if (other.transform.CompareTag("goal")) {
             col.enabled = false;
-            rigi.velocity = Vector3.zero;
+            rigi.constraints = RigidbodyConstraints.None;
+            controlador.aumentaPuntos();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

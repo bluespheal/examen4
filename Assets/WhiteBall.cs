@@ -17,7 +17,7 @@ public class WhiteBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < -0.1f)
+        if (transform.position.y < -3.0f)
         {
             transform.position = new Vector3(0, 0.08f, 0);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -33,5 +33,13 @@ public class WhiteBall : MonoBehaviour
     public void ResetBall()
     {
         ResetIt = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("goal"))
+        {
+            ResetBall();
+        }
     }
 }
