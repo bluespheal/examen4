@@ -12,13 +12,11 @@ public class GameManager : MonoBehaviour
     public Text Text2;
     protected int PuntosP1 = 0;
     protected int PuntosP2 = 0;
-    protected NormalBall[] balls;
+    public NormalBall[] balls;
     public bool turno;
     public bool cambiando;
     float alpha = 1.0f;
     Gradient gradient;
-    // Use this for initialization
-
     public goal[] goals;
     void Start()
     {
@@ -27,6 +25,7 @@ public class GameManager : MonoBehaviour
         Text.text = "Jugador 1: " + PuntosP1;
         Text2.text = "Jugador 2: " + PuntosP2;
         balls = FindObjectsOfType<NormalBall>();
+        goals = FindObjectsOfType<goal>();
         turno = true;
         gradient = new Gradient();
         gradient.SetKeys(
@@ -34,7 +33,6 @@ public class GameManager : MonoBehaviour
             new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
         );
         line.gameObject.GetComponent<LineRenderer>().colorGradient = gradient;
-        goals = FindObjectsOfType<goal>();
         dibujarLineas();
     }
 

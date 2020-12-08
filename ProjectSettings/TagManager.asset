@@ -7,6 +7,7 @@ TagManager:
   - mesa
   - goal
   - NoBall
+  - apuntador
   layers:
   - Default
   - TransparentFX
