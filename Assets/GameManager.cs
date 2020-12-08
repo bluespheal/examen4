@@ -9,20 +9,23 @@ public class GameManager : MonoBehaviour
     public Text Text;
     protected int Hits = 0;
     protected NormalBall[] balls;
+    public goal[] goals;
 
     // Use this for initialization
     void Start()
     {
-        line = FindObjectOfType<LineRenderer>();
+        line = GameObject.FindGameObjectWithTag("apuntador").gameObject.GetComponent<LineRenderer>();
         WhiteBall = FindObjectOfType<WhiteBall>();
         Text.text = "Hits: " + Hits;
         balls = FindObjectsOfType<NormalBall>();
+        goals = FindObjectsOfType<goal>();
+        dibujarLineas();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        dibujarLineas();
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         var direction = Vector3.zero;
@@ -33,7 +36,7 @@ public class GameManager : MonoBehaviour
             var mousePos = new Vector3(hit.point.x, 0.1f, hit.point.z);
             line.SetPosition(0, mousePos);
             line.SetPosition(1, ballPos);
-            direction = (mousePos - ballPos).normalized;
+            direction = (mousePos - ballPos);
         }
 
         if (Input.GetMouseButtonDown(0) && line.gameObject.activeSelf)
@@ -41,12 +44,11 @@ public class GameManager : MonoBehaviour
             Hits++;
             Text.text = "Hits: " + Hits;
             line.gameObject.SetActive(false);
-            WhiteBall.GetComponent<Rigidbody>().velocity = direction * 10f;
+            WhiteBall.GetComponent<Rigidbody>().velocity = direction*4f;
         }
 
         if (!line.gameObject.activeSelf && WhiteBall.GetComponent<Rigidbody>().velocity.magnitude < 0.3f)
         {
-
             line.gameObject.SetActive(true);
         }
     }
@@ -60,6 +62,26 @@ public class GameManager : MonoBehaviour
             ball.ResetBall();
         }
         Hits = 0;
+    }
+
+    public void dibujarLineas() {
+        Vector3 b;
+        Vector3 g;
+        Vector3 min_g = goals[0].transform.position;
+        for (int i = 0; i < balls.Length; i++) {
+            min_g = goals[0].transform.position;
+            b = balls[i].transform.position;
+            for (int j = 0; j < goals.Length; j++)
+            {
+                g = goals[j].transform.position;
+                if (Vector3.Distance(b,g)<Vector3.Distance(b, min_g)) {
+                    min_g=g;
+                    print(goals[j]);
+                }
+            }
+            print(min_g);
+            balls[i].goal_cercano = min_g;
+        }
     }
 
 }
