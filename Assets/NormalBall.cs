@@ -6,6 +6,7 @@ public class NormalBall : MonoBehaviour
 {
     protected Vector3 Startpos;
     protected bool ResetIt;
+    public Color miColor;
 
     // Use this for initialization
     void Start()
