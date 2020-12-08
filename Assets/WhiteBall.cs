@@ -10,7 +10,6 @@ public class WhiteBall : MonoBehaviour
 
     public DataCalculator data;
     public Rigidbody rigi;
-
     // Use this for initialization
     void Start()
     {

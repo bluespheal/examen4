@@ -10,7 +10,7 @@ public class NormalBall : MonoBehaviour
     public LineRenderer line;
     Rigidbody rigi;
     Collider col;
-
+    public Color miColor;
     // Use this for initialization
     void Start()
     {
