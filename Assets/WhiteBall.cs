@@ -12,6 +12,7 @@ public class WhiteBall : MonoBehaviour
     void Start()
     {
         Startpos = transform.position;
+
     }
 
     // Update is called once per frame

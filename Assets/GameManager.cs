@@ -20,25 +20,31 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        turno = true;
-        line = FindObjectOfType<LineRenderer>();
+
+    public goal[] goals;
+    void Start()
+    {
+        line = GameObject.FindGameObjectWithTag("apuntador").gameObject.GetComponent<LineRenderer>();
+        super_branch_de_chema
         WhiteBall = FindObjectOfType<WhiteBall>();
         Text.text = "Jugador 1: " + PuntosP1;
         Text2.text = "Jugador 2: " + PuntosP2;
         balls = FindObjectsOfType<NormalBall>();
-
+        turno = true;
         gradient = new Gradient();
         gradient.SetKeys(
             new GradientColorKey[] { new GradientColorKey(Jugador1, 0.0f), new GradientColorKey(Jugador1, 1.0f) },
             new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
         );
         line.gameObject.GetComponent<LineRenderer>().colorGradient = gradient;
+        goals = FindObjectsOfType<goal>();
+        dibujarLineas();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        dibujarLineas();
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         var direction = Vector3.zero;
@@ -49,19 +55,20 @@ public class GameManager : MonoBehaviour
             var mousePos = new Vector3(hit.point.x, 0.1f, hit.point.z);
             line.SetPosition(0, mousePos);
             line.SetPosition(1, ballPos);
-            direction = (mousePos - ballPos).normalized;
+            direction = (mousePos - ballPos);
         }
 
         if (Input.GetMouseButtonDown(0) && line.gameObject.activeSelf)
         {
             line.gameObject.SetActive(false);
-            WhiteBall.GetComponent<Rigidbody>().velocity = direction * 10f;
+            WhiteBall.GetComponent<Rigidbody>().velocity = direction*4f;
         }
 
         if (!line.gameObject.activeSelf && WhiteBall.GetComponent<Rigidbody>().velocity.magnitude < 0.1f && !cambiando)
         {
             cambiando = true;            
             StartCoroutine(pasaturno());
+            line.gameObject.SetActive(true);
         }
     }
 
@@ -118,6 +125,25 @@ public class GameManager : MonoBehaviour
         {
             PuntosP2++;
             Text2.text = "Jugador 2: " + PuntosP2;
+        }
+    }
+    public void dibujarLineas() {
+        Vector3 b;
+        Vector3 g;
+        Vector3 min_g = goals[0].transform.position;
+        for (int i = 0; i < balls.Length; i++) {
+            min_g = goals[0].transform.position;
+            b = balls[i].transform.position;
+            for (int j = 0; j < goals.Length; j++)
+            {
+                g = goals[j].transform.position;
+                if (Vector3.Distance(b,g)<Vector3.Distance(b, min_g)) {
+                    min_g=g;
+                    print(goals[j]);
+                }
+            }
+            print(min_g);
+            balls[i].goal_cercano = min_g;
         }
     }
 }

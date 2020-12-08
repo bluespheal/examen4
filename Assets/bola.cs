@@ -28,5 +28,4 @@ public class bola : MonoBehaviour
             controlador.aumentaPuntos();
         }
     }
-
 }
