@@ -18,14 +18,11 @@ public class GameManager : MonoBehaviour
     float alpha = 1.0f;
     Gradient gradient;
     // Use this for initialization
-    void Start()
-    {
 
     public goal[] goals;
     void Start()
     {
         line = GameObject.FindGameObjectWithTag("apuntador").gameObject.GetComponent<LineRenderer>();
-        super_branch_de_chema
         WhiteBall = FindObjectOfType<WhiteBall>();
         Text.text = "Jugador 1: " + PuntosP1;
         Text2.text = "Jugador 2: " + PuntosP2;
