@@ -10,6 +10,7 @@ public class DataCalculator : MonoBehaviour
     public Text masaText;
     public Text velocidadText;
     public Text miuText;
+    public Text miuTextChoque;
     public Text formText;
 
     public float m1;
@@ -42,9 +43,10 @@ public class DataCalculator : MonoBehaviour
     {
         u1 = object1.velocity.magnitude;
         u2 = object2.velocity.magnitude;
-
+        Color colorBola;
+        colorBola = object2.GetComponent<NormalBall>().miColor;
         UpdateRestitution();
-        UpdateMiu();
+        UpdateMiu(colorBola);
         UpdateForm();
     }
 
@@ -63,9 +65,11 @@ public class DataCalculator : MonoBehaviour
     {
         velocidadText.text = "Velocidad: " + v1;
     }
-    private void UpdateMiu()
+    private void UpdateMiu(Color colortexto)
     {
-        miuText.text = "Miu: " + u1;
+        miuText.text = "Miu Blanca: " + u1;
+        miuTextChoque.color = colortexto;
+        miuTextChoque.text = "Miu Color: " + u2;
     }
     private void UpdateRestitution()
     {
