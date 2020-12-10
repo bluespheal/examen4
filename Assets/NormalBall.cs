@@ -31,6 +31,9 @@ public class NormalBall : MonoBehaviour
             ResetIt = false;
             transform.position = Startpos;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            line.enabled = true;
+            col.enabled = true;
         }
     }
 
