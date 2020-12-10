@@ -22,6 +22,8 @@ public class WhiteBall : MonoBehaviour
         {
             transform.position = new Vector3(0, 0.08f, 0);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
         }
 
         if (ResetIt)
@@ -29,6 +31,8 @@ public class WhiteBall : MonoBehaviour
             ResetIt = false;
             transform.position = Startpos;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
         }
     }
     public void ResetBall()
@@ -48,7 +52,6 @@ public class WhiteBall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("NoBall"))
         {
-            print("choco");
             data.UpdateInputData(rigi, other.gameObject.GetComponent<Rigidbody>());
         }
     }
@@ -56,7 +59,6 @@ public class WhiteBall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("NoBall"))
         {
-            print("late");
             data.UpdateOutputData(rigi, other.gameObject.GetComponent<Rigidbody>());
         }
     }
