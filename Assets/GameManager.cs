@@ -134,10 +134,10 @@ public class GameManager : MonoBehaviour
                 g = goals[j].transform.position;
                 if (Vector3.Distance(b,g)<Vector3.Distance(b, min_g)) {
                     min_g=g;
-                    print(goals[j]);
+                    //print(goals[j]);
                 }
             }
-            print(min_g);
+            //print(min_g);
             balls[i].goal_cercano = min_g;
         }
     }
